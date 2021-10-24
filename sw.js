@@ -32,14 +32,14 @@ const bgSyncPlugin = new workbox.backgroundSync.BackgroundSyncPlugin('quotes-que
 });
 
 workbox.routing.registerRoute(
-  new RegExp('https://service-forum\\.herokuapp\\.com/api/post'),
+  new RegExp('https://service-forum\\.herokuapp\\.com/.*/post'),
   new workbox.strategies.StaleWhileRevalidate(
     dataCacheConfig
   ), 'GET'
 );
 
 workbox.routing.registerRoute(
-  /.*[0-9]+/, 
+  new RegExp('https://service-forum\\.herokuapp\\.com/.*[0-9]+'),
   new workbox.strategies.StaleWhileRevalidate(
     dataCacheConfig
   ), 'GET'
