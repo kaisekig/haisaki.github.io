@@ -32,7 +32,7 @@ const bgSyncPlugin = new workbox.backgroundSync.BackgroundSyncPlugin('quotes-que
 });
 
 workbox.routing.registerRoute(
-  new RegExp('https://service-forum\\.herokuapp\\.com/.*/post'),
+  new RegExp('https://service-forum\\.herokuapp\\.com/.*post'),
   new workbox.strategies.StaleWhileRevalidate(
     dataCacheConfig
   ), 'GET'
@@ -46,14 +46,14 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  /.*create/, 
+  new RegExp('https://service-forum\\.herokuapp\\.com/.*create'),
   new workbox.strategies.NetworkOnly({
     plugins: [bgSyncPlugin]}
   ), 'POST'
 );
 
 workbox.routing.registerRoute(
-  /.*comment/, 
+  new RegExp('https://service-forum\\.herokuapp\\.com/.*comment'),
   new workbox.strategies.NetworkOnly({
     plugins: [bgSyncPlugin]}
   ), 'POST'
